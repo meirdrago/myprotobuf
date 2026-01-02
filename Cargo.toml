@@ -1,7 +1,7 @@
 [package]
 name = "myprotobuf"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 prost = "0.12"
@@ -11,3 +11,4 @@ prost-types = "0.12"
 
 [build-dependencies]
 prost-build = "0.12"
+protoc-bin-vendored = "3.0"

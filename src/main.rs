@@ -2,6 +2,13 @@ use nalgebra::DMatrix;
 use prost::Message;
 use std::convert::TryFrom;
 
+pub mod myprotobuf {
+    include!(concat!(env!("OUT_DIR"), "/myprotobuf.rs"));
+}
+
+use myprotobuf::Detection as DetectionProto;
+use myprotobuf::DetectionList as DetectionListProto;
+use myprotobuf::MatrixRow as MatrixRowProto;
 
 #[derive(Debug, PartialEq)]
 struct Detection {
@@ -16,34 +23,6 @@ struct Detection {
 struct DetectionList {
     uid: String,
     dets: Vec<Detection>,
-}
-
-#[derive(Clone, PartialEq, Message)]
-pub struct MatrixRowProto {
-    #[prost(double, repeated, tag = "1")]
-    pub values: Vec<f64>,
-}
-
-#[derive(Clone, PartialEq, Message)]
-pub struct DetectionProto {
-    #[prost(double, tag = "1")]
-    pub timestamp: f64,
-    #[prost(uint64, tag = "2")]
-    pub number: u64,
-    #[prost(double, tag = "3")]
-    pub x: f64,
-    #[prost(double, tag = "4")]
-    pub y: f64,
-    #[prost(message, repeated, tag = "5")]
-    pub mat_data: Vec<MatrixRowProto>,
-}
-
-#[derive(Clone, PartialEq, Message)]
-pub struct DetectionListProto {
-    #[prost(string, tag = "1")]
-    pub uid: String,
-    #[prost(message, repeated, tag = "2")]
-    pub dets: Vec<DetectionProto>,
 }
 
 impl From<&Detection> for DetectionProto {
