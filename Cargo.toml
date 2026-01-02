@@ -1,0 +1,13 @@
+[package]
+name = "myprotobuf"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+prost = "0.12"
+prost-derive = "0.12"
+nalgebra = "0.32"
+prost-types = "0.12"
+
+[build-dependencies]
+prost-build = "0.12"
